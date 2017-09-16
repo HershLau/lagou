@@ -1,6 +1,7 @@
 <template>
   <div>
     index
+    <button type="submit" class="btn btn-primary">Transfer cash</button>
   </div>
 </template>
 
