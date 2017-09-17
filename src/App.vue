@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <tool-bar></tool-bar>
     <m-header></m-header>
     <keep-alive>
       <router-view></router-view>
@@ -9,13 +10,15 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import ToolBar from './components/tool-bar/tool-bar'
   import MHeader from './components/m-header/m-header'
   import MFooter from 'components/m-footer/m-footer'
 
   export default {
     components: {
       MHeader,
-      MFooter
+      MFooter,
+      ToolBar
     }
   }
 </script>
