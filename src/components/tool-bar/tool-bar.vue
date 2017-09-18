@@ -5,7 +5,7 @@
       <a class="os" :href="osUrl">进入企业版</a>
     </div>
     <ul class="list-inline pull-right right-bar">
-      <li class="right-bar-item" v-for="i in userBar" @click="clickTool(i.name)" @mouseenter="userDropdowmVisible=true" @mouseleave="userDropdowmVisible=false">
+      <li class="right-bar-item" v-for="i in userBar" @click="_clickTool(i.name)" @mouseenter="_mouseEnterHangdle(i.name)" @mouseleave="_mouseLeaveHangdle(i.name)">
         <a class="item-link" :href="i.url">{{i.name}} <span v-if="i.name==='user'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
         <div class="msg-popup" v-if="i.name==='消息'&&msgVisible">
           <div class="msg-pu-body">
@@ -50,9 +50,19 @@
       }
     },
     methods: {
-      clickTool(name) {
+      _clickTool(name) {
         if (name === '消息') {
           this.msgVisible = !this.msgVisible
+        }
+      },
+      _mouseEnterHangdle(name) {
+        if (name === 'user') {
+          this.userDropdowmVisible = true
+        }
+      },
+      _mouseLeaveHangdle(name) {
+        if (name === 'user') {
+          this.userDropdowmVisible = false
         }
       }
     }
@@ -100,7 +110,7 @@
           border 1px solid #e7e7e7
           border-radius 3px
           box-shadow -1px 1px 1px #e7e7e7
-          z-index 100px
+          z-index 100
           background #fff
           .msg-pu-body
             width 100%
