@@ -1,7 +1,9 @@
 <template>
   <div id="main-navs">
-    <div class="menu-box" :class="{current: isHover===category.name}" @mouseover="hoverHandler(category.name)" v-for="category in categoryList">
-      <div class="menu-main" >
+    <div class="menu-box" :class="{current: isHover===category.name}" @mouseover="_mouseOverHandler(category.name)"
+         @mouseout="_mouseOutHandler(category.name)"
+         v-for="category in categoryList">
+      <div class="menu-main">
         <div class="category-list">
           <h2>{{category.name}}</h2>
           <a v-for="h in category.hotWords">{{h}}</a>
@@ -74,16 +76,17 @@
       }
     },
     methods: {
-      hoverHandler(name) {
+      _mouseOverHandler(name) {
         this.isHover = name
+      },
+      _mouseOutHandler(name) {
+        this.isHover = ''
       }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "~common/stylus/base"
-
   #main-navs
     .current
       .menu-main
@@ -107,6 +110,10 @@
       color #555
       background-color transparent
       text-decoration none
+      &:hover
+        color #00b38a
+        text-decoration underline
+        cursor pointer
     .menu-box
       position relative
       .menu-main
@@ -128,10 +135,6 @@
             margin 0 5px 5px 0
             padding 0 8px
             white-space nowrap
-            cursor pointer
-            &:hover
-              color #00b38a
-              text-decoration underline
           .arrow
             position absolute
             right 0
