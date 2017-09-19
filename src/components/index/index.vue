@@ -12,8 +12,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import SearchBar from 'base/search-bar/search-bar'
-  import SideBar from 'base/side-bar/side-bar'
+  import SearchBar from 'components/search-bar/search-bar'
+  import SideBar from 'components/side-bar/side-bar'
 
   export default {
     components: {
