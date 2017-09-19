@@ -13,6 +13,12 @@
         </ul>
       </div>
     </div>
+    <dl class="hot-search">
+      <dt>热门搜索：</dt>
+      <dd v-for="i in hotSearchItems">
+        <a class="highlight">{{i}}</a>
+      </dd>
+    </dl>
   </div>
 </template>
 
@@ -33,6 +39,17 @@
           'node.js',
           'h5',
           '实习'
+        ],
+        hotSearchItems: [
+          'Java',
+          '新媒体运营',
+          '名企高薪',
+          'PHP',
+          '销售经理',
+          '产品经理',
+          'C++',
+          '内容运营',
+          '拉勾APP'
         ]
       }
     },
@@ -121,4 +138,23 @@
             &:hover
               background-color #00b38a
               color #fff
+    .hot-search
+      width 938px
+      height 22px
+      overflow hidden
+      margin 6px auto 0
+      dt
+        margin-right 10px
+        font-size 14px
+        color #777
+        float left
+      dd
+        margin-right 20px
+        color #999
+        float left
+        .highlight
+          color #00b38a
+          cursor pointer
+          &:hover
+            text-underline underline
 </style>
