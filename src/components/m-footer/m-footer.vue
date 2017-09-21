@@ -51,7 +51,6 @@
     height 67px
     border-top 1px solid #ebebeb
     position relative
-    z-index 1001
     .wrapper
       width 1024px
       margin 0 auto

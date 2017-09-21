@@ -9,6 +9,7 @@
         <div class="carousel">
           <v-carousel></v-carousel>
         </div>
+        <tab-bar></tab-bar>
       </div>
     </div>
   </div>
@@ -18,12 +19,14 @@
   import SearchBar from 'components/search-bar/search-bar'
   import SideBar from 'components/side-bar/side-bar'
   import VCarousel from 'components/v-carousel/v-carousel'
+  import TabBar from 'components/tab-bar/tab-bar'
 
   export default {
     components: {
       SearchBar,
       SideBar,
-      VCarousel
+      VCarousel,
+      TabBar
     }
   }
 
