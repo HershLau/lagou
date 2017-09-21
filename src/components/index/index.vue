@@ -10,6 +10,7 @@
           <v-carousel></v-carousel>
         </div>
         <tab-bar></tab-bar>
+        <job-cards></job-cards>
       </div>
     </div>
   </div>
@@ -20,13 +21,15 @@
   import SideBar from 'components/side-bar/side-bar'
   import VCarousel from 'components/v-carousel/v-carousel'
   import TabBar from 'components/tab-bar/tab-bar'
+  import JobCards from 'components/job-cards/job-cards'
 
   export default {
     components: {
       SearchBar,
       SideBar,
       VCarousel,
-      TabBar
+      TabBar,
+      JobCards
     }
   }
 
