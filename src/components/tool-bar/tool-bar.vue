@@ -6,7 +6,8 @@
     </div>
     <ul class="list-inline pull-right right-bar">
       <li class="right-bar-item" v-for="i in userBar" @click="_clickTool(i.name)" @mouseenter="_mouseEnterHangdle(i.name)" @mouseleave="_mouseLeaveHangdle(i.name)">
-        <a class="item-link" :href="i.url">{{i.name}} <span v-if="i.name==='user'" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
+        <a class="item-link" :href="i.url">{{i.name}}</a>
+        <i v-if="i.name==='user'" ></i>
         <div class="msg-popup" v-if="i.name==='消息'&&msgVisible">
           <div class="msg-pu-body">
             <div class="no-body">
@@ -101,6 +102,18 @@
           border-right 1px solid #5d5d5d
           padding 0 12px
           margin 7px 0 0
+        i
+          position absolute
+          top 12px
+          right 10px
+          font-size 0
+          height 0
+          width 0
+          border-width 5px 4px 0
+          border-style solid dashed
+          border-color #fff transparent transparent
+          overflow hidden
+          transition all .4s ease 0s
         .msg-popup
           position absolute
           left -20px
@@ -165,4 +178,12 @@
             line-height 30px
             padding 0 12px
             margin 0
+        &:last-child
+          .item-link
+            margin-right 12px
+            border-right none
+          &:hover
+            i
+              transform rotate(180deg)
+              animation-fill-mode forwards
 </style>

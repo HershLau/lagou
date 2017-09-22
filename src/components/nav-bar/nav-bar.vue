@@ -10,7 +10,7 @@
       </div>
       <ul class="nav-wrap list-inline">
         <li v-for="(i,index) in navItems">
-          <router-link tag="a" :to="i.url" :key="index" active-class="current">{{i.name}}</router-link>
+          <router-link exact tag="a" :to="i.url" :key="index" active-class="current">{{i.name}}</router-link>
         </li>
       </ul>
     </div>
@@ -22,7 +22,7 @@
     data() {
       return {
         navItems: [
-          {name: '首页', url: '/index'},
+          {name: '首页', url: '/'},
           {name: '公司', url: '/company'},
           {name: '校园', url: '/university'},
           {name: '言职', url: '/yanzhi'},
