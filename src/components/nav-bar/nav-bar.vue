@@ -9,7 +9,9 @@
         </div>
       </div>
       <ul class="nav-wrap list-inline">
-        <li v-for="i in navItems" @click="chooseItem(i.name)"><a :class="{current: isActive===i.name}">{{i.name}}</a></li>
+        <li v-for="(i,index) in navItems">
+          <router-link tag="a" :to="i.url" :key="index" active-class="current">{{i.name}}</router-link>
+        </li>
       </ul>
     </div>
   </nav>
@@ -20,11 +22,11 @@
     data() {
       return {
         navItems: [
-          {name: '首页', url: ''},
-          {name: '公司', url: ''},
-          {name: '校园', url: ''},
-          {name: '言职', url: ''},
-          {name: '大鲲', url: ''}
+          {name: '首页', url: '/index'},
+          {name: '公司', url: '/company'},
+          {name: '校园', url: '/university'},
+          {name: '言职', url: '/yanzhi'},
+          {name: '大鲲', url: '/dakun'}
         ],
         isActive: '首页'
       }
@@ -52,6 +54,7 @@
           color #555
           background-color transparent
           text-decoration none
+          cursor pointer
           h1
             float left
             width 97px
