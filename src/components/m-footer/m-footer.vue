@@ -99,8 +99,6 @@
         clear both
         height 12px
         margin 0 auto
-        padding-top 13px
-        padding-bottom 14px
         color #d5d5d5
         font-size 12px
         line-height 12px

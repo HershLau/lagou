@@ -24,16 +24,15 @@
         </div>
         <div class="bottom">
           <a>
-            <img src="" width="40" height="40">
+            <img :src="job.coverImg" width="40" height="40">
           </a>
           <div class="bottom-right">
             <div class="company-name">
-              <a>福建信诺</a>
+              <a>{{job.company}}</a>
             </div>
             <div class="industry wordCut">
-              <span>移动互联网</span>
-              <span>未融资</span>
-              <span>福州。鼓楼区</span>
+              <span v-for="i in job.industry">{{i}}</span>
+              <span>{{job.site}}</span>
             </div>
           </div>
         </div>
@@ -142,15 +141,15 @@
           {
             position: '法务主管',
             createAt: '14:03',
-            salary: '8-12',
-            experience: '3-5',
+            salary: '6-8',
+            experience: '1-3',
             education: '本科',
-            tags: ['律师'],
-            coverImg: '//static.lagou.com/thumbnail_100x100/i/image/M00/71/62/CgpEMlm3V4OAf3Q9AAAGR-SFpME880.png',
-            company: '',
-            industry: [],
-            scale: '',
-            site: ''
+            tags: ['主管', '法务', '助理'],
+            coverImg: '//static.lagou.com/thumbnail_160x160/i/image/M00/6E/24/CgqKkVghd2aAIhm3AABeYT_-upQ128.jpg',
+            company: '物灵智能科技',
+            industry: ['硬件', '移动互联网'],
+            scale: '不需要融资',
+            site: '北京 '
           },
           {
             position: 'java高级工程师 ',
@@ -242,7 +241,7 @@
                 height 26px
                 padding 0 5px
                 font-size 12px
-                line-height 26px
+                line-height 24px
                 color #999
                 border 1px solid #f0f0f0
                 border-radius 3px
@@ -251,7 +250,7 @@
                 overflow hidden
                 white-space nowrap
                 word-wrap normal
-                &+span
+                & + span
                   margin-left 6px
         .bottom
           margin-top 18px

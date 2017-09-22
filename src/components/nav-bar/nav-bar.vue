@@ -26,7 +26,7 @@
           {name: '言职', url: ''},
           {name: '大鲲', url: ''}
         ],
-        isActive: ''
+        isActive: '首页'
       }
     },
     methods: {
