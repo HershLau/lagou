@@ -1,6 +1,6 @@
 <template>
   <ul id="tab-bar">
-    <li v-for="(i,index) in jobList" :class="{current:index===currentIndex}" @click="chooseTab(index)">{{i}}</li>
+    <li v-for="(i,index) in tabList" :class="{current:index===currentIndex}" @click="chooseTab(index)">{{i}}</li>
   </ul>
 </template>
 
@@ -8,8 +8,15 @@
   export default {
     data() {
       return {
-        jobList: ['推荐职位', '热门职位', '最新职位'],
         currentIndex: 0
+      }
+    },
+    props: {
+      tabList: {
+        type: Array,
+        default: function () {
+          return []
+        }
       }
     },
     methods: {

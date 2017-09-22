@@ -31,7 +31,7 @@
               <a>{{job.company}}</a>
             </div>
             <div class="industry wordCut">
-              <span v-for="i in job.industry">{{i}}</span>
+              <span>{{job.industry | industryConcat}}</span>
               <span>{{job.site}}</span>
             </div>
           </div>
@@ -165,6 +165,11 @@
             site: '广东'
           }
         ]
+      }
+    },
+    filters: {
+      industryConcat: function (val) {
+        return val.join(',')
       }
     }
   }
