@@ -57,4 +57,10 @@
       cursor pointer
       &:hover
         background-position right top !important
+  @media(max-width: 1366px)
+    #app
+      #back-top
+        left auto
+        right 41px
+        margin-left 0
 </style>
