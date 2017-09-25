@@ -26,7 +26,7 @@
         <span class="title">融资阶段：</span>
         <a :class="{active:selFS.length===0}">不限</a>
         <a :class="mulSel(fs)" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
-          class="delete" @click="removeFs(fs)"></i></a>
+          class="delete" @click.stop="removeFs(fs)"></i></a>
       </li>
       <div class="has-more industry clearfix">
         <li class="multi-chosen">
@@ -73,8 +73,10 @@
         this.selIndustry = industry
       },
       removeFs(fs) {
-        let index = this.selFS.indexOf(fs)
-        this.selFS.splice(index, 1)
+//        let index = this.selFS.indexOf(fs)
+//        this.selFS.splice(index, 1)
+        this.selFS.pop()
+        console.log(this.selFS)
       },
       _inHandler() {
         this.showMore = true
