@@ -1,6 +1,6 @@
 <template>
-  <div id="app" ref="app">
-    <tool-bar></tool-bar>
+  <div id="app" ref="app" @click="_handleClick">
+    <tool-bar :visible.sync="msgVisible"></tool-bar>
     <nav-bar></nav-bar>
     <keep-alive>
       <router-view></router-view>
@@ -23,7 +23,8 @@
     },
     data() {
       return {
-        currHeight: 0
+        currHeight: 0,
+        msgVisible: false
       }
     },
     created() {
@@ -37,7 +38,11 @@
       },
       handleScroll(e) {
         this.currHeight = e.target.body.scrollTop || e.target.documentElement.scrollTop
+      },
+      _handleClick() {
+        this.msgVisible = false
       }
+
     }
   }
 </script>
@@ -57,7 +62,8 @@
       cursor pointer
       &:hover
         background-position right top !important
-  @media(max-width: 1366px)
+
+  @media (max-width: 1366px)
     #app
       #back-top
         left auto

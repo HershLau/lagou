@@ -206,6 +206,8 @@
       h3
         font-size 30px
         color #fff
+        margin-top 0
+        margin-bottom 10px
         text-shadow 0 3px 9px rgba(0, 0, 0, .25)
         height 42px
         padding 25px 0 20px
@@ -241,6 +243,7 @@
           .l-panel-list
             width 20000px
             position relative
+            left 0
             zoom 1
             transition .5s
             li
@@ -253,8 +256,8 @@
                 position absolute
                 left 0
                 top 0
-                width 160px
-                height 220px
+                width 142px
+                height 202px
                 background-color rgba(255, 255, 255, .8)
                 padding 9px
                 &:hover

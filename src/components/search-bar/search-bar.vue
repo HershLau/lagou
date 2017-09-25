@@ -62,10 +62,9 @@
         this.keyword = '实力派'
         setTimeout(() => {
           this.$refs.guess.style.display = 'none'
-        }, 20)
+        }, 200)
       },
       chooseItem(item) {
-        console.log('666666')
         this.keyword = item
       }
     }
@@ -86,7 +85,7 @@
       .search-input
         color rgb(153, 153, 153)
         width 762px
-        height 100%
+        height 20px
         line-height 20px
         float left
         font-size 16px

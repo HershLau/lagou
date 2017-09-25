@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-default" id="nav-bar">
     <div class="container nav-container">
-      <div class="nav-l pull-left">
+      <div class="nav-l">
         <a class="logo"><h1>拉勾网</h1></a>
         <div class="suggest-city">
           <strong>全国站</strong>
           <em>[切换城市]</em>
         </div>
       </div>
-      <ul class="nav-wrap list-inline">
+      <ul class="nav-wrap">
         <li v-for="(i,index) in navItems">
           <router-link exact tag="a" :to="i.url" :key="index" active-class="current">{{i.name}}</router-link>
         </li>
@@ -48,8 +48,10 @@
     border-bottom 1px solid #e5e5e5
     .nav-container
       width 1200px
+      margin 0 auto
       .nav-l
         width 260px
+        float left
         .logo
           color #555
           background-color transparent
@@ -82,6 +84,7 @@
             cursor pointer
             font-style normal
       .nav-wrap
+        float left
         li
           display inline-block
           margin 0 16px

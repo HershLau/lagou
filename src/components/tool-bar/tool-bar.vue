@@ -4,21 +4,21 @@
       <a class="icon" :href="appUrl">拉勾APP</a>
       <a class="os" :href="osUrl">进入企业版</a>
     </div>
-    <ul class="list-inline pull-right right-bar">
-      <li class="right-bar-item" v-for="i in userBar" @click="_clickTool(i.name)" @mouseenter="_mouseEnterHangdle(i.name)" @mouseleave="_mouseLeaveHangdle(i.name)">
+    <ul class="list-inline right-bar">
+      <li class="right-bar-item" v-for="i in userBar" @click.stop="_clickTool(i.name)" @mouseenter="_mouseEnterHangdle(i.name)" @mouseleave="_mouseLeaveHangdle(i.name)">
         <a class="item-link" :href="i.url">{{i.name}}</a>
-        <i v-if="i.name==='user'" ></i>
-        <div class="msg-popup" v-if="i.name==='消息'&&msgVisible">
+        <i class="icon" v-if="i.name==='user'" ></i>
+        <div class="msg-popup" v-if="i.name==='消息'&&msgVisible" @click.stop>
           <div class="msg-pu-body">
             <div class="no-body">
               <p class="no-msg">暂时没有新的消息~</p>
             </div>
           </div>
           <div class="msg-pu-footer">
-            <a class="setting pull-left">
-              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            <a class="setting">
+              <i class="msg-avatar"></i>
             </a>
-            <a class="msg-more pull-right">查看更多</a>
+            <a class="msg-more">查看更多</a>
           </div>
         </div>
         <ul v-if="i.name==='user'&&userDropdowmVisible" class="user-dropdown">
@@ -50,10 +50,22 @@
         userDropdowmVisible: false
       }
     },
+    props: [
+      'visible'
+    ],
+    watch: {
+      visible: function (val) {
+        this.msgVisible = val
+      }
+    },
     methods: {
       _clickTool(name) {
         if (name === '消息') {
           this.msgVisible = !this.msgVisible
+          this.$emit('update:visible', this.msgVisible)
+        } else {
+          this.msgVisible = false
+          this.$emit('update:visible', this.msgVisible)
         }
       },
       _mouseEnterHangdle(name) {
@@ -95,14 +107,16 @@
         padding 0 12px
         margin 7px 0 0
     .right-bar
+      float right
       .right-bar-item
         position relative
         padding 0
+        float left
         .item-link
           border-right 1px solid #5d5d5d
           padding 0 12px
           margin 7px 0 0
-        i
+        .icon
           position absolute
           top 12px
           right 10px
@@ -131,15 +145,15 @@
             overflow auto
             .no-body
               padding-top 20px
-              height 80px
+              height 60px
               .no-msg
                 padding-left 44px
-                width 170px
+                width 130px
                 margin 0 auto
                 line-height 36px
                 background #fff url(//static.lagou.com/www/static/common/widgets/header_c/modules/img/msg_popup_39fadf7.png) no-repeat
                 background-position 0 -16px
-                display: block;
+                display block
           .msg-pu-footer
             width 100%
             background #fafafa
@@ -147,17 +161,26 @@
             height 40px
             line-height 40px
             vertical-align middle
-            padding 0 10px
             .setting
+              float left
+              padding-left 10px
+              display inline-block
+              margin 0
               cursor pointer
               i
                 display inline-block
                 width 17px
                 height 17px
+                vertical-align middle
+                &.msg-avatar
+                  background-position 0 0
+                  background #fff url(//static.lagou.com/www/static/common/widgets/header_c/modules/img/msg_popup_72c460d.png) no-repeat
             .msg-more
               color #00B38A
               text-decoration underline
+              padding-right 10px
               cursor pointer
+              float right
         .user-dropdown
           overflow hidden
           width 100%
@@ -178,6 +201,10 @@
             line-height 30px
             padding 0 12px
             margin 0
+            cursor pointer
+            &:hover
+              color #fff
+              background-color #474747
         &:last-child
           .item-link
             margin-right 12px
