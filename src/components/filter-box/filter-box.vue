@@ -7,9 +7,9 @@
           <div class="city-wrapper">
             <a v-for="site in sites" :class="{active:site===selSite}" @click="choseSite(site)">{{site}}</a>
           </div>
-          <a class="btn-more">更多 <i></i></a>
+          <a class="btn-more" @mouseover="_inHandler">更多 <i></i></a>
         </li>
-        <div class="more more-position">
+        <div v-show="showMore" class="more more-position" @mouseleave="_outHandler">
           <li class="hot">
             <span class="title">公司地点：</span>
             <div class="city-wrapper">
@@ -18,13 +18,14 @@
           </li>
           <li class="other">
             <a v-for="other in otherSites">{{other}}</a>
+            <a class="all-city">全部城市 > </a>
           </li>
         </div>
       </div>
       <li class="multi-chosen financeStage clearfix">
         <span class="title">融资阶段：</span>
-        <a :class="{active:fs===selFS}" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
-          class="delete"></i></a>
+        <a :class="mulSel(fs)" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
+          class="delete" @click="removeFs(fs)"></i></a>
       </li>
       <div class="has-more industry clearfix">
         <li class="multi-chosen">
@@ -47,8 +48,9 @@
         financeStages: ['不限', '未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资'],
         industries: ['不限', '移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件'],
         selSite: '全国',
-        selFS: '不限',
-        selIndustry: '不限'
+        selFS: ['不限'],
+        selIndustry: '不限',
+        showMore: false
       }
     },
     methods: {
@@ -56,10 +58,37 @@
         this.selSite = site
       },
       choseFS(fs) {
-        this.selFS = fs
+        this.selFS.push(fs)
+        if (fs === '不限') {
+          this.selFS = ['不限']
+        }
+        if (this.selFS.length > 1 && this.selFS[0] === '不限') {
+          this.selFS.shift()
+        }
+      },
+      mulSel(fs) {
+        let index = this.selFS.indexOf(fs)
+        if (index === 0 && this.selFS[0] === '不限') {
+          return 'active'
+        } else if (index !== -1) {
+          return 'chosen'
+        } else {
+          return ''
+        }
       },
       choseIndustry(industry) {
         this.selIndustry = industry
+      },
+      removeFs(fs) {
+        let index = this.selFS.indexOf(fs)
+        this.selFS.splice(index, 1)
+        console.log(this.selFS)
+      },
+      _inHandler() {
+        this.showMore = true
+      },
+      _outHandler() {
+        this.showMore = false
       }
     }
   }
@@ -80,7 +109,36 @@
       .workcity
         z-index 10
         .more-position
-          z-index 11
+          z-index 11 !important
+          .hot
+            overflow hidden
+            width 958px
+            height 22px
+          .other
+            height auto
+            padding 0 10px
+            border-bottom 0
+            padding-left 15px
+            a
+              margin 3px 0
+            .all-city
+              color #00b38a
+              &:hover
+                background-color #fff
+                color #00b38a
+      .financeStage.multi-chosen
+        .chosen
+          position relative
+          padding-right 22px
+          background-color #00b38a
+          color #fff
+        .delete
+          position absolute
+          right 5px
+          top 5px
+          width 11px
+          height 11px
+          background url(//static.lagou.com/www/static/company-list/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
       .industry
         z-index 8
       .has-more
