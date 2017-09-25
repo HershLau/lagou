@@ -79,10 +79,21 @@
       background #fafafa
       .workcity
         z-index 10
+        .more-position
+          z-index 11
       .industry
         z-index 8
       .has-more
         position relative
+        .more
+          position absolute
+          z-index 10
+          top 0
+          left -1px
+          right -1px
+          background-color #fff
+          margin-top -1px
+          border 1px solid #ededed
       li
         position relative
         padding 4px 0
