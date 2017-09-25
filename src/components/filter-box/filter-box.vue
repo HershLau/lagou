@@ -24,6 +24,7 @@
       </div>
       <li class="multi-chosen financeStage clearfix">
         <span class="title">融资阶段：</span>
+        <a :class="{active:selFS.length===0}">不限</a>
         <a :class="mulSel(fs)" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
           class="delete" @click="removeFs(fs)"></i></a>
       </li>
@@ -45,10 +46,10 @@
       return {
         sites: ['全国', '北京', '上海', '深圳', '广州', '杭州', '成都', '南京', '武汉', '西安', '厦门', '长沙', '苏州', '天津'],
         otherSites: ['重庆', '郑州', '青岛', '合肥', '福州', '济南', '大连', '珠海', '无锡', '佛山', '东莞', '宁波', '常州', '沈阳', '石家庄', '昆明', '南昌', '南宁', '哈尔滨', '海口', '中山', '惠州', '贵阳', '长春', '太原', '嘉兴', '泰安', '昆山', '烟台', '兰州', '泉州'],
-        financeStages: ['不限', '未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资'],
+        financeStages: ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资'],
         industries: ['不限', '移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件'],
         selSite: '全国',
-        selFS: ['不限'],
+        selFS: [],
         selIndustry: '不限',
         showMore: false
       }
@@ -59,18 +60,10 @@
       },
       choseFS(fs) {
         this.selFS.push(fs)
-        if (fs === '不限') {
-          this.selFS = ['不限']
-        }
-        if (this.selFS.length > 1 && this.selFS[0] === '不限') {
-          this.selFS.shift()
-        }
       },
       mulSel(fs) {
         let index = this.selFS.indexOf(fs)
-        if (index === 0 && this.selFS[0] === '不限') {
-          return 'active'
-        } else if (index !== -1) {
+        if (index !== -1) {
           return 'chosen'
         } else {
           return ''
@@ -82,7 +75,6 @@
       removeFs(fs) {
         let index = this.selFS.indexOf(fs)
         this.selFS.splice(index, 1)
-        console.log(this.selFS)
       },
       _inHandler() {
         this.showMore = true
