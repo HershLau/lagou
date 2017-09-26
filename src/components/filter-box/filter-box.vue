@@ -7,9 +7,9 @@
           <div class="city-wrapper">
             <a v-for="site in sites" :class="{active:site===selSite}" @click="choseSite(site)">{{site}}</a>
           </div>
-          <a class="btn-more" @mouseover="_inHandler">更多 <i></i></a>
+          <a class="btn-more" @mouseover="_inSiteHandler">更多 <i></i></a>
         </li>
-        <div v-show="showMore" class="more more-position" @mouseleave="_outHandler">
+        <div v-show="showMoreSite" class="more more-position" @mouseleave="_outSiteHandler">
           <li class="hot">
             <span class="title">公司地点：</span>
             <div class="city-wrapper">
@@ -25,24 +25,25 @@
       <li class="multi-chosen financeStage clearfix">
         <span class="title">融资阶段：</span>
         <a :class="{active:selFS.length===0}">不限</a>
-        <a :class="mulSel(fs)" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
+        <a :class="mulSelFS(fs)" v-for="fs in financeStages" @click="choseFS(fs)">{{fs}}<i
           class="delete" @click.stop="removeFs(fs)"></i></a>
       </li>
       <div class="has-more industry clearfix">
         <li class="multi-chosen">
           <span class="title">行业领域：</span>
-          <a :class="{active:i===selIndustry}" v-for="i in industries" @click="choseIndustry(i)">{{i}}<i
-            class="delete"></i></a>
-          <span class="btn-more-hy">更多 <i></i></span>
+          <a :class="{active:selIndustry.length===0}">不限</a>
+          <a :class="mulSelIndustry(i)" v-for="i in industries" @click="choseIndustry(i)">{{i}}<i
+            class="delete" @click.stop="removeIndustry(i)"></i></a>
+          <span class="btn-more-hy" @mouseover="_inIndustryHandler">更多 <i></i></span>
         </li>
-        <div class="more-by">
-          <li class="hot multi-chosen">
+        <div v-show="showMoreIndustry" class="more-by" @mouseleave="_outIndustryHandler">
+          <li class="hot multi-chosen clearfix">
             <span class="title">行业领域：</span>
             <a :class="{active:selIndustry.length===0}">不限</a>
             <a :class="{active:i===selIndustry}" v-for="i in industries" @click="choseIndustry(i)">{{i}}<i
               class="delete"></i></a>
           </li>
-          <li class="other multi-chosen">
+          <li class="other multi-chosen clearfix">
             <a v-for="otherIndustry in otherIndustries">{{otherIndustry}}</a>
           </li>
         </div>
@@ -58,12 +59,13 @@
         sites: ['全国', '北京', '上海', '深圳', '广州', '杭州', '成都', '南京', '武汉', '西安', '厦门', '长沙', '苏州', '天津'],
         otherSites: ['重庆', '郑州', '青岛', '合肥', '福州', '济南', '大连', '珠海', '无锡', '佛山', '东莞', '宁波', '常州', '沈阳', '石家庄', '昆明', '南昌', '南宁', '哈尔滨', '海口', '中山', '惠州', '贵阳', '长春', '太原', '嘉兴', '泰安', '昆山', '烟台', '兰州', '泉州'],
         financeStages: ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资'],
-        industries: ['不限', '移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件'],
-        otherIndustries: ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件', '医疗健康', '生活服务', '广告营销', '旅游', '数据服务', '社交网络', '分类信息', '信息安全', '招聘', '其他'],
+        industries: ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件'],
+        otherIndustries: ['医疗健康', '生活服务', '广告营销', '旅游', '数据服务', '社交网络', '分类信息', '信息安全', '招聘', '其他'],
         selSite: '全国',
         selFS: [],
         selIndustry: [],
-        showMore: false
+        showMoreSite: false,
+        showMoreIndustry: false
       }
     },
     methods: {
@@ -73,7 +75,7 @@
       choseFS(fs) {
         this.selFS.push(fs)
       },
-      mulSel(fs) {
+      mulSelFS(fs) {
         let index = this.selFS.indexOf(fs)
         if (index !== -1) {
           return 'chosen'
@@ -81,20 +83,36 @@
           return ''
         }
       },
+      mulSelIndustry(industry) {
+        let index = this.selIndustry.indexOf(industry)
+        if (index !== -1) {
+          return 'chosen'
+        } else {
+          return ''
+        }
+      },
       choseIndustry(industry) {
-        this.selIndustry = industry
+        this.selIndustry.push(industry)
       },
       removeFs(fs) {
         let index = this.selFS.indexOf(fs)
         this.selFS.splice(index, 1)
-//        this.selFS.pop()
-        console.log(this.selFS)
       },
-      _inHandler() {
-        this.showMore = true
+      removeIndustry(industry) {
+        let index = this.selIndustry.indexOf(industry)
+        this.selIndustry.splice(index, 1)
       },
-      _outHandler() {
-        this.showMore = false
+      _inSiteHandler() {
+        this.showMoreSite = true
+      },
+      _outSiteHandler() {
+        this.showMoreSite = false
+      },
+      _inIndustryHandler() {
+        this.showMoreIndustry = true
+      },
+      _outIndustryHandler() {
+        this.showMoreIndustry = false
       }
     }
   }
@@ -147,16 +165,36 @@
           background url(//static.lagou.com/www/static/company-list/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
       .industry
         z-index 8
+        .multi-chosen
+          .chosen
+            position relative
+            padding-right 22px
+            background-color #00b38a
+            color #fff
+          .delete
+            position absolute
+            right 5px
+            top 5px
+            width 11px
+            height 11px
+            background url(//static.lagou.com/www/static/company-list/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
         .more-by
           display block
           position absolute
-          z-index 10
+          z-index 11
           top 0
           left -1px
           right -1px
           background-color #fff
           margin-top -1px
-          border 1px solid
+          border 1px solid #ededed
+          .other
+            height auto
+            padding 0 10px
+            border-bottom 0
+            padding-left 15px
+            a
+              margin 3px 0
       .has-more
         position relative
         .more
