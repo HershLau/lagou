@@ -17,7 +17,7 @@
             </div>
           </li>
           <li class="other">
-            <a v-for="other in otherSites">{{other}}</a>
+            <a v-for="otherSite in otherSites">{{otherSite}}</a>
             <a class="all-city">全部城市 > </a>
           </li>
         </div>
@@ -35,6 +35,17 @@
             class="delete"></i></a>
           <span class="btn-more-hy">更多 <i></i></span>
         </li>
+        <div class="more-by">
+          <li class="hot multi-chosen">
+            <span class="title">行业领域：</span>
+            <a :class="{active:selIndustry.length===0}">不限</a>
+            <a :class="{active:i===selIndustry}" v-for="i in industries" @click="choseIndustry(i)">{{i}}<i
+              class="delete"></i></a>
+          </li>
+          <li class="other multi-chosen">
+            <a v-for="otherIndustry in otherIndustries">{{otherIndustry}}</a>
+          </li>
+        </div>
       </div>
     </div>
   </ul>
@@ -48,9 +59,10 @@
         otherSites: ['重庆', '郑州', '青岛', '合肥', '福州', '济南', '大连', '珠海', '无锡', '佛山', '东莞', '宁波', '常州', '沈阳', '石家庄', '昆明', '南昌', '南宁', '哈尔滨', '海口', '中山', '惠州', '贵阳', '长春', '太原', '嘉兴', '泰安', '昆山', '烟台', '兰州', '泉州'],
         financeStages: ['未融资', '天使轮', 'A轮', 'B轮', 'C轮', 'D轮及以上', '上市公司', '不需要融资'],
         industries: ['不限', '移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件'],
+        otherIndustries: ['移动互联网', '电子商务', '金融', '企业服务', '教育', '文化娱乐', '游戏', 'O2O', '硬件', '医疗健康', '生活服务', '广告营销', '旅游', '数据服务', '社交网络', '分类信息', '信息安全', '招聘', '其他'],
         selSite: '全国',
         selFS: [],
-        selIndustry: '不限',
+        selIndustry: [],
         showMore: false
       }
     },
@@ -73,9 +85,9 @@
         this.selIndustry = industry
       },
       removeFs(fs) {
-//        let index = this.selFS.indexOf(fs)
-//        this.selFS.splice(index, 1)
-        this.selFS.pop()
+        let index = this.selFS.indexOf(fs)
+        this.selFS.splice(index, 1)
+//        this.selFS.pop()
         console.log(this.selFS)
       },
       _inHandler() {
@@ -135,6 +147,16 @@
           background url(//static.lagou.com/www/static/company-list/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
       .industry
         z-index 8
+        .more-by
+          display block
+          position absolute
+          z-index 10
+          top 0
+          left -1px
+          right -1px
+          background-color #fff
+          margin-top -1px
+          border 1px solid
       .has-more
         position relative
         .more
