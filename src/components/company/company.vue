@@ -202,7 +202,7 @@
             processingRate: 16
           }
         ],
-        currentPage: 2
+        currentPage: 1
       }
     },
     components: {

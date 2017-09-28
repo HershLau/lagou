@@ -1,8 +1,13 @@
 <template>
   <div id="pagination">
     <span class="pager-prev" @click.stop="prev">上一页</span>
-    <span v-if="omit" v-for="n in total" :class="{'page-is-current':n===mCurrentPage}"
-          @click.stop="toPage(n)">{{n}}</span>
+    <span class="item" :class="{'page-is-current':1===mCurrentPage}" @click.stop="toPage({index:1})">1</span>
+    <span v-show="mCurrentPage>4">···</span>
+    <span class="item" v-if="n.visible" v-for="n in pageArr" :class="{'page-is-current':n.index===mCurrentPage}"
+          @click.stop="toPage(n)">{{n.index}}</span>
+    <span v-show="mCurrentPage<total-3">···</span>
+    <span class="item" :class="{'page-is-current':total===mCurrentPage}"
+          @click.stop="toPage({index:total})">{{total}}</span>
     <span class="pager-next" @click.stop="next">下一页</span>
   </div>
 </template>
@@ -11,7 +16,8 @@
   export default {
     data() {
       return {
-        mCurrentPage: this.currentPage
+        mCurrentPage: this.currentPage,
+        pageArr: []
       }
     },
     props: {
@@ -28,18 +34,46 @@
         default: 10
       }
     },
-    computed: {
-      omit() {
-        let n = this.mCurrentPage
-        if (n > 3 && n < 20) {
-          return false
+    created() {
+      for (let i = 0; i < this.total - 2; i++) {
+        let page = {
+          index: i + 2,
+          visible: false
         }
-        return true
+        if (i < 2) {
+          page.visible = true
+        }
+        this.pageArr.push(page)
+      }
+    },
+    watch: {
+      mCurrentPage: function (n) {
+        this.pageArr.forEach(function (p) {
+          p.visible = true
+        })
+        if (n > 4 && n < this.total - 3) {
+          for (let i = 2; i < n - 2; i++) {
+            this.pageArr[i - 2].visible = false
+          }
+          for (let i = n + 3; i < this.total; i++) {
+            this.pageArr[i - 2].visible = false
+          }
+        }
+        if (n <= 4) {
+          for (let i = n + 3; i < this.total; i++) {
+            this.pageArr[i - 2].visible = false
+          }
+        }
+        if (n >= this.total - 3) {
+          for (let i = 2; i < n - 2; i++) {
+            this.pageArr[i - 2].visible = false
+          }
+        }
       }
     },
     methods: {
       toPage(n) {
-        this.mCurrentPage = n
+        this.mCurrentPage = n.index
         this.$emit('update:currentPage', this.mCurrentPage)
       },
       prev() {
@@ -54,7 +88,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   #pagination
-    span
+    .item
       cursor pointer
       color #555
       display inline-block
