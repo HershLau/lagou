@@ -51,20 +51,12 @@
         this.pageArr.forEach(function (p) {
           p.visible = true
         })
-        if (n > 4 && n < this.total - 3) {
-          for (let i = 2; i < n - 2; i++) {
-            this.pageArr[i - 2].visible = false
-          }
+        if (n < this.total - 3) {
           for (let i = n + 3; i < this.total; i++) {
             this.pageArr[i - 2].visible = false
           }
         }
-        if (n <= 4) {
-          for (let i = n + 3; i < this.total; i++) {
-            this.pageArr[i - 2].visible = false
-          }
-        }
-        if (n >= this.total - 3) {
+        if (n > 4) {
           for (let i = 2; i < n - 2; i++) {
             this.pageArr[i - 2].visible = false
           }
