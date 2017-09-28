@@ -1,6 +1,6 @@
 <template>
   <div id="pagination">
-    <span class="pager-prev" @click.stop="prev">上一页</span>
+    <span class="item" :class="{'pager-disable':1===mCurrentPage}" @click.stop="prev">上一页</span>
     <span class="item" :class="{'page-is-current':1===mCurrentPage}" @click.stop="toPage({index:1})">1</span>
     <span v-show="mCurrentPage>4">···</span>
     <span class="item" v-if="n.visible" v-for="n in pageArr" :class="{'page-is-current':n.index===mCurrentPage}"
@@ -8,7 +8,7 @@
     <span v-show="mCurrentPage<total-3">···</span>
     <span class="item" :class="{'page-is-current':total===mCurrentPage}"
           @click.stop="toPage({index:total})">{{total}}</span>
-    <span class="pager-next" @click.stop="next">下一页</span>
+    <span class="item" :class="{'pager-disable':total===mCurrentPage}" @click.stop="next">下一页</span>
   </div>
 </template>
 
@@ -93,9 +93,9 @@
       text-decoration none
       &:first-child
         margin 0 5px 0 0
-    .pager-prev-disable
-      color silver !important
-      cursor default !important
+      &.pager-disable
+        color silver !important
+        cursor default !important
     .page-is-current
       background-color #00b38a !important
       color #fff !important
