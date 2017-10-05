@@ -6,19 +6,19 @@
         <div class="fl nav-container">
           <side-bar class="side-bar" :categoryList="categoryList"></side-bar>
         </div>
-        <div class="fr carouser-container home-banner">
-          <ul class="banner-bg">
-            <li class="banner-item" v-for="bg in bgs">
+        <div class="fr carouser-container home-banner" @mouseover="_bgOverHandler()" @mouseout="_bgOutHandler">
+          <transition-group name="list" tag="ul" class="banner-bg">
+            <li v-show="index===currentIndex" class="banner-item" v-for="(bg,index) in bgs" :key="index">
               <a>
                 <img :src="bg.bgUrl">
               </a>
             </li>
-          </ul>
+          </transition-group>
           <div class="banner-control">
             <ul class="thumbs">
-              <li class="thumb-item" v-for="bg in bgs">
+              <li class="thumb-item" v-for="(bg,index) in bgs" @mouseover="_ctrOverHandler(index)">
                 <img :src="bg.ctrUrl">
-                <div class="thumb-border"></div>
+                <div class="thumb-border" :class="{'thumb-item-selected':index===currentIndex}"></div>
               </li>
             </ul>
           </div>
@@ -113,12 +113,42 @@
             bgUrl: 'https://static.lagou.com/i/image2/M00/06/88/CgoB5lnKDuCAUnJdAAc6BzC5-QA275.JPG',
             ctrUrl: 'https://static.lagou.com/i/image2/M00/06/F9/CgotOVnLR8mAXMpKAABZ1tXmUYQ586.PNG'
           }
-        ]
+        ],
+        currentIndex: 0
       }
+    },
+    created() {
+      this.start()
     },
     components: {
       USearchBar,
       SideBar
+    },
+    methods: {
+      autoPlay() {
+        this.currentIndex++
+        if (this.currentIndex > this.bgs.length - 1) {
+          this.currentIndex = 0
+        }
+      },
+      start() {
+        this.timer = setInterval(() => {
+          this.autoPlay()
+        }, 5000)
+      },
+      stop() {
+        clearInterval(this.timer)
+      },
+      _ctrOverHandler(index) {
+        this.currentIndex = index
+        this.stop()
+      },
+      _bgOverHandler() {
+        this.stop()
+      },
+      _bgOutHandler() {
+        this.start()
+      }
     }
   }
 </script>
@@ -150,10 +180,11 @@
             list-style none
             margin 0
             padding 0
-            transition left 1s
             overflow hidden
+            width 500%
             .banner-item
-              display inline-block
+              position absolute
+              width 20%
               a
                 color #555
                 background-color transparent
@@ -190,6 +221,18 @@
                   width 100%
                   height 100%
               .thumb-item-selected
-              .thumb-border:hover
                 border 3px solid #00b38a
+  .list-enter-active
+    transition all .3s ease
+    transform translateX(0)
+
+  .list-leave-active
+    transition all .3s ease
+    transform translateX(-100%)
+
+  .list-enter
+    transform translateX(100%)
+
+  .list-leave
+    transform translateX(0)
 </style>
