@@ -6,9 +6,9 @@
         <div class="fl nav-container">
           <side-bar class="side-bar" :categoryList="categoryList"></side-bar>
         </div>
-        <div class="fr carouser-container home-banner" @mouseover="_bgOverHandler()" @mouseout="_bgOutHandler">
+        <div class="fr carouser-container home-banner" @mouseover="_bgOverHandler" @mouseout="_bgOutHandler">
           <transition-group name="list" tag="ul" class="banner-bg">
-            <li v-show="index===currentIndex" class="banner-item" v-for="(bg,index) in bgs" :key="index">
+            <li v-show="index===bgCurrIndex" class="banner-item" v-for="(bg,index) in bgs" :key="index">
               <a>
                 <img :src="bg.bgUrl">
               </a>
@@ -18,12 +18,18 @@
             <ul class="thumbs">
               <li class="thumb-item" v-for="(bg,index) in bgs" @mouseover="_ctrOverHandler(index)">
                 <img :src="bg.ctrUrl">
-                <div class="thumb-border" :class="{'thumb-item-selected':index===currentIndex}"></div>
+                <div class="thumb-border" :class="{'thumb-item-selected':index===bgCurrIndex}"></div>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <section class="company-wall-container">
+        <div class="nav-tabs">
+          <span class="tab-item" @click="selTab(index)" :class="{active:index===tabCurrIndex}" v-for="(tab,index) in tabs">{{tab}}</span>
+        </div>
+        <company-wall></company-wall>
+      </section>
     </div>
   </div>
 </template>
@@ -31,6 +37,7 @@
 <script type="text/ecmascript-6">
   import USearchBar from 'components/u-search-bar/u-search-bar'
   import SideBar from 'components/side-bar/side-bar'
+  import CompanyWall from 'components/company-wall/company-wall'
 
   export default {
     data() {
@@ -85,15 +92,6 @@
               '财务': ['会计', '出纳'],
               '法务': ['法务', '律师', '专利']
             }
-          },
-          {
-            name: '金融',
-            hotWords: ['投资', '融资', '并购', '风控'],
-            detail: {
-              '风控': ['资信评估', '合规稽查', '律师'],
-              '审计税务': ['审计', '法务', '会计', '清算'],
-              '高端职位': ['投资总监', '融资总监']
-            }
           }
         ],
         bgs: [
@@ -114,7 +112,17 @@
             ctrUrl: 'https://static.lagou.com/i/image2/M00/06/F9/CgotOVnLR8mAXMpKAABZ1tXmUYQ586.PNG'
           }
         ],
-        currentIndex: 0
+        bgCurrIndex: 0,
+        tabs: [
+          '北京',
+          '上海',
+          '广州',
+          '深圳',
+          '成都',
+          '杭州',
+          '其他'
+        ],
+        tabCurrIndex: 0
       }
     },
     created() {
@@ -122,13 +130,17 @@
     },
     components: {
       USearchBar,
-      SideBar
+      SideBar,
+      CompanyWall
     },
     methods: {
+      selTab(index) {
+        this.tabCurrIndex = index
+      },
       autoPlay() {
-        this.currentIndex++
-        if (this.currentIndex > this.bgs.length - 1) {
-          this.currentIndex = 0
+        this.bgCurrIndex++
+        if (this.bgCurrIndex > this.bgs.length - 1) {
+          this.bgCurrIndex = 0
         }
       },
       start() {
@@ -140,7 +152,7 @@
         clearInterval(this.timer)
       },
       _ctrOverHandler(index) {
-        this.currentIndex = index
+        this.bgCurrIndex = index
         this.stop()
       },
       _bgOverHandler() {
@@ -208,7 +220,7 @@
                 width 160px
                 height 60px
                 overflow hidden
-                &+.thumb-item
+                & + .thumb-item
                   margin-left 10px
                 img
                   width 100%
@@ -222,6 +234,28 @@
                   height 100%
               .thumb-item-selected
                 border 3px solid #00b38a
+
+
+
+      .company-wall-container
+        margin-top 40px
+        .nav-tabs
+          line-height 22px
+          color #999
+          font-size 16px
+          border-bottom 1px solid #e8e8e8
+          .tab-item
+            margin 0 60px 0 0
+            padding 16px 0
+            cursor pointer
+            display inline-block
+            &.active
+              padding-bottom 14px
+              color #333
+              cursor default
+              border-bottom 2px solid #333
+
+
   .list-enter-active
     transition all .3s ease
     transform translateX(0)
