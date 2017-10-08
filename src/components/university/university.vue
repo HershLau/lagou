@@ -25,10 +25,33 @@
         </div>
       </div>
       <section class="company-wall-container">
-        <div class="nav-tabs">
-          <span class="tab-item" @click="selTab(index)" :class="{active:index===tabCurrIndex}" v-for="(tab,index) in tabs">{{tab}}</span>
-        </div>
+        <nav-tabs :tabs="siteTabs" :tabCurrIndex.sync="siteTabCurrIndex"></nav-tabs>
         <company-wall></company-wall>
+      </section>
+      <section class="job-container">
+        <nav-tabs :tabs="posTabs" :tabCurrIndex.sync="posTabCurrIndex"></nav-tabs>
+        <div class="jobs">
+          <ul class="job-list">
+            <li class="job-item" v-for="job in positions">
+              <div class="header">
+                <a class="job-link">
+                  <h4>
+                    <span class="job-name">{{job.title}}</span>
+                    <span class="salary"></span>
+                  </h4>
+                  <p class="experience">{{job.exp}}</p>
+                </a>
+              </div>
+              <div class="company">
+                <a class="company-link">
+                  <h4 class="title">{{job.company}}</h4>
+                  <p class="infos">{{job.industry}}</p>
+                  <img class="logo" :src="job.logo" width="50" height="50">
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
       </section>
     </div>
   </div>
@@ -38,6 +61,7 @@
   import USearchBar from 'components/u-search-bar/u-search-bar'
   import SideBar from 'components/side-bar/side-bar'
   import CompanyWall from 'components/company-wall/company-wall'
+  import NavTabs from 'components/nav-tabs/nav-tabs'
 
   export default {
     data() {
@@ -113,7 +137,7 @@
           }
         ],
         bgCurrIndex: 0,
-        tabs: [
+        siteTabs: [
           '北京',
           '上海',
           '广州',
@@ -122,7 +146,115 @@
           '杭州',
           '其他'
         ],
-        tabCurrIndex: 0
+        posTabs: [
+          '技术',
+          '产品',
+          '运营',
+          '设计',
+          '市场',
+          '销售',
+          '职能'
+        ],
+        siteTabCurrIndex: 0,
+        posTabCurrIndex: 0,
+        positions: [
+          {
+            title: 'Java开发（版本升级模块）',
+            exp: '本科',
+            logo: 'https://static.lagou.com/image1/M00/00/33/CgYXBlTUXI-AC08_AACIkHlny3Y866.jpg',
+            company: '泛微',
+            industry: '移动互联网,企业服务',
+            site: '上海'
+          },
+          {
+            title: '游戏测试实习生',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/C3/CB/Cgp3O1jcvUOATXv_AABZ6zpEAKk174.jpg',
+            company: '陌陌',
+            industry: '社交网络',
+            site: '北京'
+          },
+          {
+            title: 'Java开发实习生（2018届）',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/25/FF/CgpEMlkZJL6AAbnbAAAMGLhQkjw565.png',
+            company: '亲宝宝',
+            industry: '移动互联网,社交网络',
+            site: '杭州'
+          },
+          {
+            title: '软件测试实习生（南京）',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/1B/E5/CgqKkVb-JPiAH55zAAAGmR36eIM506.png',
+            company: '北森云计算',
+            industry: '企业服务,数据服务',
+            site: '南京'
+          },
+          {
+            title: '测试实习生',
+            exp: '本科',
+            logo: 'https://static.lagou.com/image1/M00/00/06/CgYXBlTUWAeANQBuAABHTL1SBa8889.jpg',
+            company: '去哪儿网',
+            industry: '移动互联网',
+            site: '北京'
+          },
+          {
+            title: '测试实习生',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/7D/D7/CgqKkVhIy6mAWdXiAAAuG0CkxhU755.png',
+            company: '饿了么',
+            industry: '移动互联网',
+            site: '北京'
+          },
+          {
+            title: '软件工程师（实习生）',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/83/08/Cgp3O1hYy2CALCDTAAAbl7AOZZg842.jpg',
+            company: '埃森哲',
+            industry: '企业服务,数据服务',
+            site: '上海'
+          },
+          {
+            title: 'Python实习生',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/7D/D7/CgqKkVhIy6mAWdXiAAAuG0CkxhU755.png',
+            company: '饿了么',
+            industry: '移动互联网',
+            site: '北京'
+          },
+          {
+            title: 'C++',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/57/05/CgqKkVfOIv6AQwyPAAEg94dso0Q147.png',
+            company: '乐易网络',
+            industry: '移动互联网,游戏',
+            site: '深圳'
+          },
+          {
+            title: '后台开发实习生-核心广告系统',
+            exp: '本科',
+            logo: 'https://static.lagou.com/image1/M00/00/01/Cgo8PFTUV_OAH8cPAACZoNxm1EI176.jpg',
+            company: '今日头条',
+            industry: '移动互联网,数据服务',
+            site: '北京'
+          },
+          {
+            title: '前端开发工程师',
+            exp: '大专',
+            logo: 'https://static.lagou.com/i/image/M00/4A/DE/CgpFT1ltsZuAZKJZAAAUAX88bcY941.jpg',
+            company: '上海聪充网络科技有限公司',
+            industry: '移动互联网,电子商务',
+            site: '上海'
+          },
+          {
+            title: '测试',
+            exp: '本科',
+            logo: 'https://static.lagou.com/i/image/M00/65/83/CgpFT1mlFSWAJrrnAACWcSWNiu8425.png',
+            company: '小肚皮App',
+            industry: '移动互联网',
+            site: '北京'
+          }
+        ]
       }
     },
     created() {
@@ -131,12 +263,10 @@
     components: {
       USearchBar,
       SideBar,
-      CompanyWall
+      CompanyWall,
+      NavTabs
     },
     methods: {
-      selTab(index) {
-        this.tabCurrIndex = index
-      },
       autoPlay() {
         this.bgCurrIndex++
         if (this.bgCurrIndex > this.bgs.length - 1) {
@@ -234,26 +364,13 @@
                   height 100%
               .thumb-item-selected
                 border 3px solid #00b38a
-
-
-
       .company-wall-container
         margin-top 40px
-        .nav-tabs
-          line-height 22px
-          color #999
-          font-size 16px
-          border-bottom 1px solid #e8e8e8
-          .tab-item
-            margin 0 60px 0 0
-            padding 16px 0
-            cursor pointer
-            display inline-block
-            &.active
-              padding-bottom 14px
-              color #333
-              cursor default
-              border-bottom 2px solid #333
+      .job-container
+        margin 57px 0 40px
+        line-height 22px
+        color #333
+        font-size 16px
 
 
   .list-enter-active
