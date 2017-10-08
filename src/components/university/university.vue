@@ -35,7 +35,7 @@
             <li class="job-item" v-for="job in positions">
               <div class="header">
                 <a class="job-link">
-                  <h4>
+                  <h4 class="title">
                     <span class="job-name">{{job.title}}</span>
                     <span class="salary"></span>
                   </h4>
@@ -45,7 +45,7 @@
               <div class="company">
                 <a class="company-link">
                   <h4 class="title">{{job.company}}</h4>
-                  <p class="infos">{{job.industry}}</p>
+                  <p class="infos">{{job.industry}}/{{job.site}}</p>
                   <img class="logo" :src="job.logo" width="50" height="50">
                 </a>
               </div>
@@ -371,8 +371,59 @@
         line-height 22px
         color #333
         font-size 16px
-
-
+        .job-list
+          margin 20px -5px 0
+          padding 0
+          list-style none
+          overflow hidden
+          .job-item
+            margin 5px
+            padding 16px 20px 20px
+            width 292px
+            height 160px
+            border 1px solid #eaeeed
+            box-sizing border-box
+            float left
+            .title
+              margin 0
+              text-overflow ellipsis
+              overflow hidden
+              white-space nowrap
+            .header
+              position relative
+              border-bottom 1px dashed #d1d8d6
+            .job-link
+              cursor pointer
+              .title
+                padding 0 72px 0 0
+                position relative
+                .salary
+                  color #ff5b42
+                  right 0
+                  top 0
+                  position absolute
+              .experience
+                margin 6px 0 8px
+                line-height 20px
+                color #999
+                font-size 14px
+            .company
+              margin 14px 0 0
+              padding 0 0 0 64px
+              position relative
+              .infos
+                margin 5px 0 0
+                line-height 20px
+                color #777
+                font-size 14px
+              .logo
+                width 50px
+                height 50px
+                left 0
+                top 0
+                position absolute
+            .company-link
+              cursor pointer
   .list-enter-active
     transition all .3s ease
     transform translateX(0)
