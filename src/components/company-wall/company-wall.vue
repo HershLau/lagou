@@ -375,4 +375,11 @@
         i
           margin-right 10px
           font-size 14px
+      .company-desc
+        line-height 20px
+        margin-top 20px
+        font-size 14px
+        color #777
+      .company-imgs
+        margin-top 30px
 </style>
