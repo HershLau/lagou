@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from 'components/index/index'
 import Company from 'components/company/company'
 import University from 'components/university/university'
+import JobTalk from 'components/job-talk/job-talk'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/university',
       name: 'University',
       component: University
+    },
+    {
+      path: '/job-talk',
+      name: 'JobTalk',
+      component: JobTalk
     }
   ]
 })

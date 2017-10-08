@@ -25,7 +25,7 @@
           {name: '首页', url: '/'},
           {name: '公司', url: '/company'},
           {name: '校园', url: '/university'},
-          {name: '言职', url: '/yanzhi'},
+          {name: '言职', url: '/job-talk'},
           {name: '大鲲', url: '/dakun'}
         ],
         isActive: '首页'
