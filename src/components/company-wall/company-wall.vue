@@ -36,8 +36,8 @@
       <div class="company-desc">
         {{companies[currIndex]&&companies[currIndex].desc}}
       </div>
-      <ul class="compan-imgs">
-        <li></li>
+      <ul class="company-imgs">
+        <li v-for="pic in companies[currIndex].pics" :style="{backgroundImage:'url('+pic+')'}"></li>
       </ul>
     </a>
   </div>
@@ -303,7 +303,7 @@
             ]
           }
         ],
-        currIndex: -1
+        currIndex: 0
       }
     },
     methods: {
@@ -382,4 +382,11 @@
         color #777
       .company-imgs
         margin-top 30px
+        li
+          display inline-block
+          width 219px
+          height 130px
+          background-size cover
+          &+li
+            margin-left 11px
 </style>
