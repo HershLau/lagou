@@ -8,7 +8,10 @@
   export default {
     props: {
       tabs: Array,
-      tabCurrIndex: 0
+      tabCurrIndex: {
+        type: Number,
+        default: 0
+      }
     },
     methods: {
       selTab(index) {

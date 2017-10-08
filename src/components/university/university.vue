@@ -53,6 +53,18 @@
           </ul>
         </div>
       </section>
+      <section class="gallery-container">
+        <nav-tabs :tabs="galleryTabs"></nav-tabs>
+        <div class="galleries">
+          <ul class="gallery-list">
+            <li class="gallery-item" :class="{'larger-item':index===0||index===7}" :style="{backgroundImage:'url('+g.coverImg+')'}" v-for="(g,index) in galleries">
+              <a class="gallery-link" :href="g.link">
+                <span class="text">{{g.text}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -254,6 +266,59 @@
             industry: '移动互联网',
             site: '北京'
           }
+        ],
+        galleryTabs: ['活动广场'],
+        galleries: [
+          {
+            link: 'https://activity.lagou.com/topic/yanzhijingxuan1.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/54/36/CgpEMll4dYGAUmyEAACweuserZA288.JPG',
+            text: '玩转秋招，拿下心仪offer的必备技能'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/campufestival.html',
+            coverImg: 'https://static.lagou.com/i/image2/M00/01/DD/CgoB5lm_isWARAovAAC-PD1WuDs291.JPG',
+            text: '100+名企邀你投递'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/graduation.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/50/65/CgpFT1l4Wa2AK5l9AADRRJiG-qQ203.JPG',
+            text: '梦想不毕业 · 校招专场'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/campousassembly.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/54/36/CgpEMll4dnWAJPuzAAC9nCPRFbc690.JPG',
+            text: '千峰教育 | 校园集结号'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/jianlinaxieshi.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/50/69/CgpFT1l4XKSAKmUkAADCvX2PQLo031.JPG',
+            text: '手把手教你写出满分简历'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/guanguozhibo.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/54/13/CgpEMll4TpWAKsyQAADM4MxEk7E417.JPG',
+            text: '直播行业特别火，快上车'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/diantai.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/50/5E/CgpFT1l4Up6AN8dqAACACIMyB10127.JPG',
+            text: '这次我们要相遇在电波里'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/smallbeautiful2.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/54/18/CgpEMll4UvaAL2aqAADNGxoPa7o945.JPG',
+            text: '那些你可能错过的“小”公司'
+          },
+          {
+            link: 'http://activity.lagou.com/topic/365wen.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/50/62/CgpFT1l4VfuAWl3QAACmkfFRobY436.JPG',
+            text: '说说BAT的那些事'
+          },
+          {
+            link: 'https://activity.lagou.com/topic/jiagoushi.html',
+            coverImg: 'https://static.lagou.com/i/image/M00/50/60/CgpFT1l4VCOAENckAAD32UvACNc617.JPG',
+            text: '寻找未来架构师'
+          }
         ]
       }
     },
@@ -424,6 +489,41 @@
                 position absolute
             .company-link
               cursor pointer
+      .gallery-container
+        line-height 22px
+        color #333
+        font-size 16px
+        .galleries
+          margin 30px -5px 64px
+          overflow hidden
+        .gallery-item
+          margin 5px
+          width 200px
+          height 200px
+          background-repeat no-repeat
+          cursor pointer
+          position relative
+          float left
+          &.larger-item
+            width 360px
+          .gallery-link
+            display block
+            width 100%
+            height 100%
+            cursor pointer
+          .text
+            position absolute
+            left 0
+            right 0
+            bottom 0
+            display block
+            background-color rgba(0, 0, 0, .2)
+            font-size 14px
+            color #fff
+            line-height 38px
+            height 38px
+            padding 0 0 0 16px
+
   .list-enter-active
     transition all .3s ease
     transform translateX(0)
