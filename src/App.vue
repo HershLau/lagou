@@ -7,6 +7,7 @@
     </keep-alive>
     <m-footer></m-footer>
     <a v-if="currHeight" id="back-top" title="回到顶部" @click="backTop"></a>
+    <v-dialog></v-dialog>
   </div>
 </template>
 
@@ -14,12 +15,14 @@
   import ToolBar from './components/tool-bar/tool-bar'
   import NavBar from './components/nav-bar/nav-bar'
   import MFooter from 'components/m-footer/m-footer'
+  import vDialog from 'components/dialog/dialog'
 
   export default {
     components: {
       NavBar,
       MFooter,
-      ToolBar
+      ToolBar,
+      vDialog
     },
     data() {
       return {
