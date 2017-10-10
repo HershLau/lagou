@@ -4,8 +4,8 @@
       <div class="nav-l">
         <a class="logo"><h1>拉勾网</h1></a>
         <div class="suggest-city">
-          <strong>全国站</strong>
-          <em>[切换城市]</em>
+          <strong>{{currCity}}</strong>
+          <em @click="openDialog">[切换城市]</em>
         </div>
       </div>
       <ul class="nav-wrap">
@@ -28,12 +28,19 @@
           {name: '言职', url: '/job-talk'},
           {name: '大鲲', url: '/dakun'}
         ],
-        isActive: '首页'
+        isActive: '首页',
+        currCity: '全国站'
       }
     },
     methods: {
       chooseItem(name) {
         this.isActive = name
+      },
+      openDialog() {
+        this.$emit('openDialog', true)
+      },
+      changeCity(city) {
+        this.currCity = city
       }
     }
   }

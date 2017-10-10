@@ -9,7 +9,9 @@
       </div>
       <div style="clear: left">
         <div class="middle-left border fl"></div>
-        <div class="content fl"></div>
+        <div class="content fl">
+          <slot></slot>
+        </div>
         <div class="middle-right border fl"></div>
       </div>
       <div style="clear: left">
