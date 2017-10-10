@@ -33,10 +33,10 @@ npm run build
 
 ## 项目截图
 
-![shouye](./screenshot/shouye.png)
+![shouye](./screenshot/shouye.png)<br>
 
-![gongsi](./screenshot/gongsi.png)
+![gongsi](./screenshot/gongsi.png)<br>
 
-![xiaoyuan](./screenshot/xiaoyuan.png)
+![xiaoyuan](./screenshot/xiaoyuan.png)<br>
 
-![yanzhi](./screenshot/yanzhi.png)
+![yanzhi](./screenshot/yanzhi.png)<br>
